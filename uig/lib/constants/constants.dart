@@ -31,3 +31,10 @@ TextStyle headingH4 = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold);
 TextStyle bodyBig = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 18, fontWeight: FontWeight.normal);
+
+
+// Platform  Firebase App Id
+// web       1:370513350511:web:fee0322e3275d9d125629a
+// android   1:370513350511:android:a8220f16f680e27525629a
+// ios       1:370513350511:ios:01b7741b48ff856625629a
+// macos     1:370513350511:ios:1de3850c49bb7a6825629a

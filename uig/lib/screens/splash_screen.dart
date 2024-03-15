@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intro_slider/intro_slider.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/components/splash_slider.dart';
 import 'package:uig/constants/constants.dart';
@@ -43,16 +41,17 @@ class SplashScreen extends StatelessWidget {
                               builder: (context) => const LoginScreen(),
                             ));
                       },
-                      child: Text(
-                        "Skip",
-                        style: GoogleFonts.dmSans(
-                            color: primaryColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                      child: SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: Text(
+                          "Skip",
+                          style: GoogleFonts.dmSans(
+                              color: primaryColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 30,
                     ),
                   ],
                 ),

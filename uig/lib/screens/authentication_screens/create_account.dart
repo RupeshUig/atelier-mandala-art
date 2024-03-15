@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uig/components/custom_button.dart';
@@ -14,9 +12,53 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isDismissible: true,
+      enableDrag: true,
+      showDragHandle: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+          height: 350,
+          child:  Center(
+            child: Column(
+              children: [
+                Text(
+                  'Terms and Conditions!',
+                  style: headingH3,
+                ),
+                ListTile(
+                  leading: Icon(Icons.check_circle),
+                  title: Text('Lorem ipsum dolor sit amet'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.check_circle),
+                  title: Text('Consectetur adipiscing elit'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.check_circle),
+                  title: Text('Sed do eiusmod tempor incididunt'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.check_circle),
+                  title: Text('Ut labore et dolore magna aliqua'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool checkboxValue = false;
+    bool _isChecked = true;
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
@@ -124,16 +166,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               Row(
                 children: [
                   Material(
-                      child: Checkbox.adaptive(
-                          value: checkboxValue,
-                          onChanged: (value) {
-                            setState(() {
-                              checkboxValue = value ?? false;
-                            });
-                          })),
-                  Text.rich(TextSpan(children: [
+                    child: Checkbox(
+                      value: _isChecked,
+                      onChanged: (value) {
+                        print("hello");
+                        _showBottomSheet(context);
+                        setState(() {
+                          _isChecked = value ?? false;
+                        });
+                      },
+                    ),
+                  ),
+                  Text.rich(TextSpan(style: GoogleFonts.dmSans(), children: [
                     TextSpan(
-                        text: 'By creating an account, you aggree to our\n'),
+                        text: 'By creating an account, you agree to our\n'),
                     TextSpan(
                         text: 'Term and Conditions',
                         style: GoogleFonts.dmSans(
