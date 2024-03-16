@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -256,14 +257,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconContainer(
-                    Icons.facebook,
+                    Icons.golf_course,
                     () async {
                       await AuthController.instance.signInWithGoogle();
                     },
                   ),
-                  // IconContainer(
-                  //   Icons.gamepad,
-                  // ),
+                  IconContainer(
+                    Icons.facebook,
+                  () {
+                    
+                  },
+                  ),
                   // IconContainer(
                   //   Icons.apple,
                   // ),
@@ -285,12 +289,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   fontWeight: FontWeight.normal,
                   fontSize: 16),
             ),
-            Text(
-              "Sign up here ",
-              style: GoogleFonts.dmSans(
-                  color: primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Text(
+                "Sign up here ",
+                style: GoogleFonts.dmSans(
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
             ),
           ],
         ),

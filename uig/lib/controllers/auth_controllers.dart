@@ -77,6 +77,38 @@ class AuthController extends GetxController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
+
+  // Future<UserCredential> signInWithApple() async {
+  //   final appleProvider = AppleAuthProvider();
+  //   if (kIsWeb) {
+  //     await FirebaseAuth.instance.signInWithPopup(appleProvider);
+  //   } else {
+  //     await FirebaseAuth.instance.signInWithProvider(appleProvider);
+  //   }
+  // }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      Get.snackbar("Success", "Password reset email sent to $email");
+    } catch (e) {
+      Get.snackbar(
+        "Error sending password reset email", "$e");
+      
+    }
+  }
+
   void logout() async {
     await FirebaseAuth.instance.signOut();
   }
