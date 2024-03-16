@@ -44,6 +44,8 @@ dependencies:
   get: ^4.6.6
   firebase_auth: ^4.17.9
   firebase_core: ^2.27.1
+  password_field_validator: ^0.0.1
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:password_field_validator/password_field_validator.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/constants/constants.dart';
+import 'package:uig/controllers/auth_controllers.dart';
+import 'package:uig/screens/home_screen.dart/home_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -12,6 +16,12 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  AuthController authController = AuthController();
+  bool obscureValue = true;
+
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       isDismissible: true,
@@ -25,7 +35,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         return Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
           height: 350,
-          child:  Center(
+          child: Center(
             child: Column(
               children: [
                 Text(
@@ -96,6 +106,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
+                controller: nameController,
                 decoration: InputDecoration(
                   hintText: "Full Name",
                   hintStyle: GoogleFonts.dmSans(
@@ -118,11 +129,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye_outlined,
-                    color: Colors.grey.shade500,
-                  ),
                   hintText: "hello@example.com",
                   hintStyle: GoogleFonts.dmSans(
                     color: Colors.grey.shade500,
@@ -144,10 +152,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
-                obscureText: true,
+                controller: passwordController,
+                obscureText: obscureValue,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye_outlined,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.remove_red_eye_outlined),
+                    onPressed: () {
+                      setState(() {
+                        obscureValue = !obscureValue;
+                      });
+                    },
                     color: Colors.grey.shade500,
                   ),
                   hintText: "Password",
@@ -160,6 +174,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: PasswordFieldValidator(
+                  minLength: 8,
+                  uppercaseCharCount: 1,
+                  lowercaseCharCount: 1,
+                  numericCharCount: 0,
+                  specialCharCount: 1,
+                  defaultColor: Colors.black,
+                  successColor: Colors.green,
+                  failureColor: Colors.red,
+                  controller: passwordController,
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -169,7 +197,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     child: Checkbox(
                       value: _isChecked,
                       onChanged: (value) {
-                        print("hello");
                         _showBottomSheet(context);
                         setState(() {
                           _isChecked = value ?? false;
@@ -178,7 +205,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     ),
                   ),
                   Text.rich(TextSpan(style: GoogleFonts.dmSans(), children: [
-                    TextSpan(
+                    const TextSpan(
                         text: 'By creating an account, you agree to our\n'),
                     TextSpan(
                         text: 'Term and Conditions',
@@ -191,7 +218,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 text: "Create Account",
                 color: primaryColor,
                 textColor: Colors.white,
-                function: () {},
+                function: () {
+                  print(nameController.text);
+                  AuthController.instance.signUp(
+                    nameController.text.trim(),
+                    passwordController.text.trim(),
+                    emailController.text.trim(),
+                  );
+                },
               ),
               const SizedBox(
                 height: 10,
@@ -223,13 +257,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 children: [
                   IconContainer(
                     Icons.facebook,
+                    () async {
+                      await AuthController.instance.signInWithGoogle();
+                    },
                   ),
-                  IconContainer(
-                    Icons.gamepad,
-                  ),
-                  IconContainer(
-                    Icons.apple,
-                  ),
+                  // IconContainer(
+                  //   Icons.gamepad,
+                  // ),
+                  // IconContainer(
+                  //   Icons.apple,
+                  // ),
                 ],
               ),
             ],
@@ -261,23 +298,26 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 
-  Widget IconContainer(IconData icon) {
-    return Container(
-      height: 60,
-      width: 90,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 2,
+  Widget IconContainer(IconData icon, Function()? function) {
+    return InkWell(
+      onTap: function,
+      child: Container(
+        height: 60,
+        width: 90,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 2,
+          ),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12),
         ),
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Icon(
-          icon, // Replace with Google icon
-          color: Colors.black,
-          size: 30,
+        child: Center(
+          child: Icon(
+            icon, // Replace with Google icon
+            color: Colors.black,
+            size: 30,
+          ),
         ),
       ),
     );

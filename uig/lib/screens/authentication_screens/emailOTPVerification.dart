@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/constants/constants.dart';
+import 'package:uig/screens/authentication_screens/reset_password.dart';
 
 class OTPVerification extends StatefulWidget {
   const OTPVerification({super.key});
@@ -155,7 +156,13 @@ class _OTPVerificationState extends State<OTPVerification> {
                           text: "Submit",
                           color: primaryColor,
                           textColor: Colors.white,
-                          function: () {},
+                          function: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ResetPassword(),
+                                ));
+                          },
                         );
                       });
                     },

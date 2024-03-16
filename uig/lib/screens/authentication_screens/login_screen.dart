@@ -4,14 +4,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/constants/constants.dart';
+import 'package:uig/controllers/auth_controllers.dart';
 import 'package:uig/screens/authentication_screens/create_account.dart';
 import 'package:uig/screens/authentication_screens/forgot_password.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    bool obsVal = true;
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
@@ -49,6 +58,7 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: "hello@example.com",
                   hintStyle: GoogleFonts.dmSans(
@@ -71,11 +81,18 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
-                obscureText: true,
+                controller: passwordController,
+                obscureText: obsVal,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye_outlined,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.remove_red_eye_outlined),
                     color: Colors.grey.shade500,
+                    onPressed: () {
+                      // print(passwordController.text);
+                      // setState(() {
+                      //   obsVal = !obsVal;
+                      // });
+                    },
                   ),
                   hintText: "Password",
                   hintStyle: GoogleFonts.dmSans(
@@ -113,7 +130,10 @@ class LoginScreen extends StatelessWidget {
                 text: "Sign In",
                 color: primaryColor,
                 textColor: Colors.white,
-                function: () {},
+                function: () {
+                  AuthController.instance.login(emailController.text.trim(),
+                      passwordController.text.trim());
+                },
               ),
               const SizedBox(
                 height: 20,
