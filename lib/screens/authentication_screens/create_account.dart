@@ -175,20 +175,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: PasswordFieldValidator(
-                  minLength: 8,
-                  uppercaseCharCount: 1,
-                  lowercaseCharCount: 1,
-                  numericCharCount: 0,
-                  specialCharCount: 1,
-                  defaultColor: Colors.black,
-                  successColor: Colors.green,
-                  failureColor: Colors.red,
-                  controller: passwordController,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(15),
+              //   child: PasswordFieldValidator(
+              //     minLength: 8,
+              //     uppercaseCharCount: 1,
+              //     lowercaseCharCount: 1,
+              //     numericCharCount: 0,
+              //     specialCharCount: 1,
+              //     defaultColor: Colors.black,
+              //     successColor: Colors.green,
+              //     failureColor: Colors.red,
+              //     controller: passwordController,
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -257,20 +257,19 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconContainer(
-                    Icons.golf_course,
+                    'lib/assets/google.png',
                     () async {
                       await AuthController.instance.signInWithGoogle();
                     },
                   ),
                   IconContainer(
-                    Icons.facebook,
-                  () {
-                    
-                  },
+                    'lib/assets/facebook.png',
+                    () {},
                   ),
-                  // IconContainer(
-                  //   Icons.apple,
-                  // ),
+                  IconContainer(
+                    'lib/assets/apple.png',
+                    () {},
+                  ),
                 ],
               ),
             ],
@@ -305,7 +304,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 
-  Widget IconContainer(IconData icon, Function()? function) {
+  Widget IconContainer(String path, Function()? function) {
     return InkWell(
       onTap: function,
       child: Container(
@@ -319,11 +318,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           color: backgroundColor,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
-          child: Icon(
-            icon, // Replace with Google icon
-            color: Colors.black,
-            size: 30,
+        child: Container(
+          padding: EdgeInsets.all(15),
+          // decoration: BoxDecoration(color: Colors.blue),
+          child: Image.asset(
+            path,
+            fit: BoxFit.contain,
           ),
         ),
       ),

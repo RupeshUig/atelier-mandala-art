@@ -97,15 +97,18 @@ class AuthController extends GetxController {
   //     await FirebaseAuth.instance.signInWithProvider(appleProvider);
   //   }
   // }
-
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       Get.snackbar("Success", "Password reset email sent to $email");
     } catch (e) {
-      Get.snackbar(
-        "Error sending password reset email", "$e");
-      
+      String errorMessage =
+          "An error occurred while sending the password reset email.";
+      if (e is FirebaseAuthException) {
+        errorMessage = e.message ?? "Unknown error";
+      }
+      Get.snackbar("Error", errorMessage);
+      print("Error sending password reset email: $e");
     }
   }
 

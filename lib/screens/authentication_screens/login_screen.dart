@@ -84,16 +84,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: passwordController,
                 obscureText: obsVal,
                 decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.remove_red_eye_outlined),
-                    color: Colors.grey.shade500,
-                    onPressed: () {
-                      // print(passwordController.text);
-                      // setState(() {
-                      //   obsVal = !obsVal;
-                      // });
-                    },
-                  ),
+                  // suffixIcon: IconButton(
+                  //   icon: Icon(Icons.remove_red_eye_outlined),
+                  //   color: Colors.grey.shade500,
+                  //   onPressed: () {
+                  //     // print(passwordController.text);
+                  //     // setState(() {
+                  //     //   obsVal = !obsVal;
+                  //     // });
+                  //   },
+                  // ),
                   hintText: "Password",
                   hintStyle: GoogleFonts.dmSans(
                     color: Colors.grey.shade500,
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PasswordRecovery(),
+                          builder: (context) => PasswordRecovery(),
                         ));
                   },
                   child: Text(
@@ -125,6 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               CustomButton(
                 text: "Sign In",
@@ -164,13 +167,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconContainer(
-                    Icons.facebook,
+                    'lib/assets/google.png',
+                    () async {
+                      await AuthController.instance.signInWithGoogle();
+                    },
                   ),
                   IconContainer(
-                    Icons.gamepad,
+                    'lib/assets/facebook.png',
+                    () {},
                   ),
                   IconContainer(
-                    Icons.apple,
+                    'lib/assets/apple.png',
+                    () {},
                   ),
                 ],
               ),
@@ -212,23 +220,27 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget IconContainer(IconData icon) {
-    return Container(
-      height: 70,
-      width: 90,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 2,
+  Widget IconContainer(String path, Function()? function) {
+    return InkWell(
+      onTap: function,
+      child: Container(
+        height: 60,
+        width: 90,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 2,
+          ),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12),
         ),
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Icon(
-          icon, // Replace with Google icon
-          color: Colors.black,
-          size: 30,
+        child: Container(
+          padding: EdgeInsets.all(15),
+          // decoration: BoxDecoration(color: Colors.blue),
+          child: Image.asset(
+            path,
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     );
