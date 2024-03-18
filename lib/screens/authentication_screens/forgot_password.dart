@@ -3,10 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/constants/constants.dart';
-import 'package:uig/screens/authentication_screens/emailOTPVerification.dart';
+import 'package:uig/controllers/auth_controllers.dart';
 
 class PasswordRecovery extends StatelessWidget {
-  const PasswordRecovery({super.key});
+  PasswordRecovery({super.key});
+  TextEditingController emailController = TextEditingController();
+  AuthController authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +75,9 @@ class PasswordRecovery extends StatelessWidget {
                 color: primaryColor,
                 textColor: Colors.white,
                 function: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OTPVerification(),
-                      ));
+                  authController
+                      .sendPasswordResetEmail(emailController.text.trim());
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(
@@ -89,6 +89,4 @@ class PasswordRecovery extends StatelessWidget {
       ),
     );
   }
-
-  
 }

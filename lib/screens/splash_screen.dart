@@ -5,8 +5,6 @@ import 'package:uig/components/splash_slider.dart';
 import 'package:uig/constants/constants.dart';
 import 'package:uig/screens/authentication_screens/create_account.dart';
 import 'package:uig/screens/authentication_screens/login_screen.dart';
-import 'package:uig/screens/home_screen.dart/home_screen.dart';
-import 'package:uig/components/custom_upcoming_card.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -82,11 +80,10 @@ class SplashScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const LoginScreen(),
                         ));
                   },
                 ),
-                // CustomCardUpcoming(textcategory: "kkf", color: Colors.black26, textrating: '', textPrice: 's', textViews: 'd', textItem: 'f')
               ],
             ),
           ),

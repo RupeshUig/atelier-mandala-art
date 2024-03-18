@@ -4,14 +4,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:uig/components/custom_button.dart';
 import 'package:uig/constants/constants.dart';
+import 'package:uig/controllers/auth_controllers.dart';
 import 'package:uig/screens/authentication_screens/create_account.dart';
 import 'package:uig/screens/authentication_screens/forgot_password.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    bool obsVal = true;
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
@@ -49,6 +58,7 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: "hello@example.com",
                   hintStyle: GoogleFonts.dmSans(
@@ -71,12 +81,19 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               TextField(
-                obscureText: true,
+                controller: passwordController,
+                obscureText: obsVal,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye_outlined,
-                    color: Colors.grey.shade500,
-                  ),
+                  // suffixIcon: IconButton(
+                  //   icon: Icon(Icons.remove_red_eye_outlined),
+                  //   color: Colors.grey.shade500,
+                  //   onPressed: () {
+                  //     // print(passwordController.text);
+                  //     // setState(() {
+                  //     //   obsVal = !obsVal;
+                  //     // });
+                  //   },
+                  // ),
                   hintText: "Password",
                   hintStyle: GoogleFonts.dmSans(
                     color: Colors.grey.shade500,
@@ -88,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -97,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PasswordRecovery(),
+                          builder: (context) => PasswordRecovery(),
                         ));
                   },
                   child: Text(
@@ -109,11 +126,17 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               CustomButton(
                 text: "Sign In",
                 color: primaryColor,
                 textColor: Colors.white,
-                function: () {},
+                function: () {
+                  AuthController.instance.login(emailController.text.trim(),
+                      passwordController.text.trim());
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -144,13 +167,18 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconContainer(
-                    Icons.facebook,
+                    'lib/assets/google.png',
+                    () async {
+                      await AuthController.instance.signInWithGoogle();
+                    },
                   ),
                   IconContainer(
-                    Icons.gamepad,
+                    'lib/assets/facebook.png',
+                    () {},
                   ),
                   IconContainer(
-                    Icons.apple,
+                    'lib/assets/apple.png',
+                    () {},
                   ),
                 ],
               ),
@@ -192,23 +220,27 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget IconContainer(IconData icon) {
-    return Container(
-      height: 70,
-      width: 90,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 2,
+  Widget IconContainer(String path, Function()? function) {
+    return InkWell(
+      onTap: function,
+      child: Container(
+        height: 60,
+        width: 90,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 2,
+          ),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(12),
         ),
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Icon(
-          icon, // Replace with Google icon
-          color: Colors.black,
-          size: 30,
+        child: Container(
+          padding: EdgeInsets.all(15),
+          // decoration: BoxDecoration(color: Colors.blue),
+          child: Image.asset(
+            path,
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     );
