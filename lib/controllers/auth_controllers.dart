@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uig/screens/home_screen.dart/home_screen.dart';
+import 'package:uig/screens/home_screen.dart/homescreen.dart';
 import 'package:uig/screens/splash_screen.dart';
 
 class AuthController extends GetxController {
@@ -24,7 +25,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => SplashScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => HomePage());
     }
   }
 

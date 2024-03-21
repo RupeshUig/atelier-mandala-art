@@ -22,10 +22,9 @@ class CustomButtonHome extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       radius: 2,
       onTap: function,
-      child: Expanded(
-        child: Container(
+      child:  Container(
           height: screenHeight * 0.06,
-          // width: screenWidth * 0.35,
+          width: screenWidth * 0.25,
           margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 1),
           decoration: BoxDecoration(
             boxShadow: [BoxShadow(color: Colors.grey.shade300)],
@@ -37,12 +36,12 @@ class CustomButtonHome extends StatelessWidget {
               text,
               style: GoogleFonts.dmSans(
                 color: textColor,
-                fontSize: 18,
+                fontSize: 12,
               ),
             ),
           ),
         ),
-      ),
+      
     );
   }
 }

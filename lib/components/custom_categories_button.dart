@@ -25,11 +25,12 @@ class CustomCategoriesButton extends StatelessWidget {
       radius: 2,
       onTap: function,
       child: Container(
-        height: screenHeight * 0.065,
+        height: screenHeight * 0.060,
         width: screenWidth * 0.35,
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.grey.shade300)],
+          boxShadow: [BoxShadow(color: Colors.grey.shade100)],
+          border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(14),
           color: color,
         ),
@@ -37,6 +38,7 @@ class CustomCategoriesButton extends StatelessWidget {
           child: Text(
             text,
             style: GoogleFonts.dmSans(
+              fontWeight: FontWeight.bold,
               color: textColor,
               fontSize: 18,
             ),

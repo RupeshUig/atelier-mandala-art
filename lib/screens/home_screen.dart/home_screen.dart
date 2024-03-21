@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -127,21 +127,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: screenWidth, // Adjust height as needed
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        SizedBox(
-                          width: screenWidth * 0.9,
-                          child: categoryUpcomingCard(
-                              Colors.white,
-                              additionalBlueLight,
-                              Colors.black,
-                              const Color.fromARGB(38, 0, 0, 0),
-                              "Cooking",
-                              "5/5",
-                              "139.00",
-                              "98",
-                              "Aaloo Paranthas",
-                              context),
-                        ),
+                        children: [
+                          SizedBox(
+                            width: screenWidth * 0.9,
+                            child: categoryUpcomingCard(
+                                Colors.white,
+                                additionalBlueLight,
+                                Colors.black,
+                                const Color.fromARGB(38, 0, 0, 0),
+                                "Cooking",
+                                "5/5",
+                                "139.00",
+                                "98",
+                                "Aaloo Paranthas",
+                                context),
+                          ),
                         SizedBox(
                           width: screenWidth * 0.9,
                           child: categoryUpcomingCard(
