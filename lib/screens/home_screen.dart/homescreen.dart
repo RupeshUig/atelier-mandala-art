@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uig/components/coustom_cources.dart';
 import 'package:uig/components/custom_buttonhome.dart';
 import 'package:uig/components/custom_categories_button.dart';
 import 'package:uig/components/custom_upcoming_card.dart';
@@ -8,6 +9,7 @@ import 'package:uig/components/homescreen/filter_chips.dart';
 import 'package:uig/components/homescreen/top_rated.dart';
 import 'package:uig/components/homescreen/upcoming_item.dart';
 import 'package:uig/constants/constants.dart';
+import 'package:uig/components/custom_instructor.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -232,14 +234,117 @@ class _HomePageState extends State<HomePage> {
                       rating: 4.2,
                       title: "Figma Course");
                 },
-              )
+              ),
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Instructors",
+                    style: GoogleFonts.urbanist(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 28,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: GoogleFonts.urbanist(
+                      color: Colors.grey.shade600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1, // Number of columns
+                  crossAxisSpacing: 0, // Spacing between columns
+                  mainAxisSpacing: 5, // Spacing between rows
+                  childAspectRatio: 1 / 0.59,
+                ),
+                itemCount: 2, // Number of items in the grid
+                itemBuilder: (BuildContext context, int index) {
+                  // Return a widget for each item
+                  return customInstructorCard(
+                      Colors.white,
+                      Colors.black,
+                      Colors.grey.shade500,
+                      "English teacher",
+                      "5/5",
+                      "12 400",
+                      "6",
+                      " Lina Kovalenko",
+                      context);
+                },
+              ),
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Free Courses",
+                    style: GoogleFonts.urbanist(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 28,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: GoogleFonts.urbanist(
+                      color: Colors.grey.shade600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1, // Number of columns
+                  crossAxisSpacing: 0, // Spacing between columns
+                  mainAxisSpacing: 5, // Spacing between rows
+                  childAspectRatio: 1 / 0.61,
+                ),
+                itemCount: 2, // Number of items in the grid
+                itemBuilder: (BuildContext context, int index) {
+                  // Return a widget for each item
+                  return customCoursesCard(
+                      const Color.fromARGB(45, 0, 0, 0),
+                      additionalBlueLight,
+                      Colors.black,
+                      Colors.grey.shade500,
+                      "Design",
+                      "5/5",
+                      '150',
+                      "98 reviews",
+                      "Figma course design",
+                      context);
+                },
+              ),
+              // const SizedBox(
+              //   height: 50,
+              // ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
           fixedColor: Colors.deepPurpleAccent,
-          
           type: BottomNavigationBarType.fixed,
           iconSize: 30,
           items: [

@@ -37,7 +37,7 @@ Widget customInstructDetails(
             Icon(
               Icons.people,
               color: additionalBlueLight,
-              size: 25.0,
+              size: 19.0,
             ),
             SizedBox(
               width: screenWidth * 0.01,
@@ -45,7 +45,7 @@ Widget customInstructDetails(
             Text(
               "+${textValue}",
               style: GoogleFonts.dmSans(
-                color: textColorbold,
+                color: Color.fromARGB(187, 0, 0, 0),
                 fontSize: 14,
               ),
             ),
@@ -55,7 +55,7 @@ Widget customInstructDetails(
             Icon(
               Icons.blinds_closed,
               color: additionalBlueLight,
-              size: 25.0,
+              size: 19.0,
             ),
             SizedBox(
               width: screenWidth * 0.01,
@@ -63,7 +63,7 @@ Widget customInstructDetails(
             Text(
               "${textCourseName} courses",
               style: GoogleFonts.dmSans(
-                color: textColorbold,
+                color: Color.fromARGB(187, 0, 0, 0),
                 fontSize: 14,
               ),
             ),
@@ -73,7 +73,7 @@ Widget customInstructDetails(
             Icon(
               Icons.star_border_purple500_outlined,
               color: additionalBlueLight,
-              size: 25.0,
+              size: 19.0,
             ),
             SizedBox(
               width: screenWidth * 0.02,
@@ -81,7 +81,7 @@ Widget customInstructDetails(
             Text(
               "${textRating} rating",
               style: GoogleFonts.dmSans(
-                color: textColorbold,
+                color: Color.fromARGB(187, 0, 0, 0),
                 fontSize: 14,
               ),
             )

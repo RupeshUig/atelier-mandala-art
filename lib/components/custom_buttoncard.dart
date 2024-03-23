@@ -20,19 +20,19 @@ class CustomCardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final screenHeight = MediaQuery.of(context).size.height;
-  final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       radius: 2,
       onTap: function,
       child: Container(
         height: 40,
-        width: screenWidth*width,
+        width: screenWidth * width,
         margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 12)],
-          borderRadius: BorderRadius.circular(12),
+          boxShadow: [BoxShadow(color: Colors.grey.shade300)],
+          borderRadius: BorderRadius.circular(6),
           color: color,
         ),
         child: Center(
