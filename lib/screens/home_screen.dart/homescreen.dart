@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uig/components/custom_buttonhome.dart';
 import 'package:uig/components/custom_categories_button.dart';
-import 'package:uig/components/custom_upcoming_card.dart';
 import 'package:uig/components/homescreen/filter_chips.dart';
 import 'package:uig/components/homescreen/top_rated.dart';
 import 'package:uig/components/homescreen/upcoming_item.dart';

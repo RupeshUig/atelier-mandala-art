@@ -291,7 +291,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Text(
-                "Sign up here ",
+                "Sign in here ",
                 style: GoogleFonts.dmSans(
                     color: primaryColor,
                     fontWeight: FontWeight.bold,

@@ -10,7 +10,7 @@ class UpcomingItem extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
       width: screenWidth * 0.8,
-      height: screenHeight * 0.1,
+      height: screenHeight * 0.15,
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -25,7 +25,7 @@ class UpcomingItem extends StatelessWidget {
         children: [
           Container(
             width: screenWidth * 0.75,
-            height: screenHeight * 0.2,
+            height: screenHeight * 0.25,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
