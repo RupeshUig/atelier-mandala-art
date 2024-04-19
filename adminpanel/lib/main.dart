@@ -1,18 +1,21 @@
 import 'package:adminpanel/firebase_options.dart';
+import 'package:adminpanel/screens/home_screen.dart';
+import 'package:adminpanel/screens/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en_US',
-      supportedLocales: ['en_US', 'es', 'fa', 'ar', 'ru']);
-  runApp(LocalizedApp(delegate, const MyApp()));
-  runApp(const MyApp());
+  try {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    runApp(const MyApp());
+  } catch (e) {
+    print('Failed to initialize Firebase: $e');
+    // Handle initialization error gracefully
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -21,133 +24,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
-    return LocalizationProvider(
-      state: LocalizationProvider.of(context).state,
-      child: MaterialApp(
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          localizationDelegate
-        ],
-        supportedLocales: localizationDelegate.supportedLocales,
-        locale: localizationDelegate.currentLocale,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Set status bar color to transparent
+    ));
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: AuthenticationWrapper(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
-  final String? title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _decrementCounter() => setState(() => _counter--);
-
-  void _incrementCounter() => setState(() => _counter++);
-
+class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(translate('app_bar.title')),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(translate('language.selected_message', args: {
-              'language': translate(
-                  'language.name.${localizationDelegate.currentLocale.languageCode}')
-            })),
-            Padding(
-                padding: EdgeInsets.only(top: 25, bottom: 160),
-                child: CupertinoButton.filled(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 36.0),
-                  onPressed: () => _onActionSheetPress(context),
-                  child: Text(translate('button.change_language')),
-                )),
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(translatePlural('plural.demo', _counter))),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.remove_circle),
-                  iconSize: 48,
-                  onPressed: _counter > 0
-                      ? () => setState(() => _decrementCounter())
-                      : null,
-                ),
-                IconButton(
-                  icon: Icon(Icons.add_circle),
-                  color: Colors.blue,
-                  iconSize: 48,
-                  onPressed: () => setState(() => _incrementCounter()),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void showDemoActionSheet(
-      {required BuildContext context, required Widget child}) {
-    showCupertinoModalPopup<String>(
-        context: context,
-        builder: (BuildContext context) => child).then((String? value) {
-      if (value != null) changeLocale(context, value);
-    });
-  }
-
-  void _onActionSheetPress(BuildContext context) {
-    showDemoActionSheet(
-      context: context,
-      child: CupertinoActionSheet(
-        title: Text(translate('language.selection.title')),
-        message: Text(translate('language.selection.message')),
-        actions: <Widget>[
-          CupertinoActionSheetAction(
-            child: Text(translate('language.name.en')),
-            onPressed: () => Navigator.pop(context, 'en_US'),
-          ),
-          CupertinoActionSheetAction(
-            child: Text(translate('language.name.es')),
-            onPressed: () => Navigator.pop(context, 'es'),
-          ),
-          CupertinoActionSheetAction(
-            child: Text(translate('language.name.ar')),
-            onPressed: () => Navigator.pop(context, 'ar'),
-          ),
-          CupertinoActionSheetAction(
-            child: Text(translate('language.name.ru')),
-            onPressed: () => Navigator.pop(context, 'ru'),
-          ),
-        ],
-        cancelButton: CupertinoActionSheetAction(
-          child: Text(translate('button.cancel')),
-          isDefaultAction: true,
-          onPressed: () => Navigator.pop(context, null),
-        ),
-      ),
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator(); // Loading indicator
+        } else {
+          if (snapshot.hasData) {
+            // User is signed in
+            return HomeScreen();
+          } else {
+            // User is not signed in
+            return SplashScreen();
+          }
+        }
+      },
     );
   }
 }

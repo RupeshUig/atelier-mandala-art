@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'ateliermandala-2ead9.appspot.com',
     measurementId: 'G-2G87BNDK96',
   );
+
 }
