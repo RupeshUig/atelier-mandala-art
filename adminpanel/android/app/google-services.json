@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458897946123",
+    "project_id": "ateliermandala-2ead9",
+    "storage_bucket": "ateliermandala-2ead9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458897946123:android:d414f4819e0b176e38790e",
+        "android_client_info": {
+          "package_name": "com.example.adminpanel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA40s3-eS1OAzClQE2MxrbUL2xxfAESqkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
