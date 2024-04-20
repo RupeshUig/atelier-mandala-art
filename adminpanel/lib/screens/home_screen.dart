@@ -6,7 +6,6 @@ import 'package:adminpanel/screens/login_screen.dart';
 import 'package:adminpanel/screens/workshops/manage_workshops.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -145,9 +144,46 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: [
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
-            Image.asset("lib/assets/logo/splash_logo.png"),
+            Image.asset(
+              "lib/assets/logo/splash_logo.png",
+              height: 100,
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: const Text('Dashboard'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: const Text('Course'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: const Text('User'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.payment),
+              title: const Text('Payments'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
             ListTile(
               leading: Icon(Icons.book),
               title: const Text('Manage Workshops'),
@@ -186,6 +222,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ...
               },
             ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.payment),
+              title: const Text('Edit Profile'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.payment),
+              title: const Text('Change Password'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
             ListTile(
               leading: Icon(Icons.logout),
               title: const Text('Logout'),
@@ -200,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ...
               },
             ),
-            const SizedBox(height: 160),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Text("Signed In as \n ${user!.email}"),

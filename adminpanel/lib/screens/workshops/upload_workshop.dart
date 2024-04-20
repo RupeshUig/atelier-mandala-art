@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:adminpanel/constants/constants.dart';
 import 'package:adminpanel/providers/workshop_provider.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -72,7 +69,9 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
           "Add Workshop",
@@ -85,31 +84,6 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () async {
-                  _getImage();
-                },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  child: (_image != null)
-                      ? Container(
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: FileImage(
-                                    _image!,
-                                  ))),
-                        )
-                      : Center(
-                          child: Icon(Icons.add),
-                        ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
               Text(
                 "Add a Title",
                 style: GoogleFonts.poppins(fontSize: 18),
@@ -149,6 +123,48 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                     ),
                   ),
                 ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  _getImage();
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: (_image != null)
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(
+                                    _image!,
+                                  ))),
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.upload),
+                                Text("Tap here to Upload an Image"),
+                              ],
+                            ),
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const SizedBox(
+                height: 30,
               ),
               const SizedBox(
                 height: 50,
@@ -368,8 +384,9 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                               message: "Workshop uploaded successfully.",
                             ),
                           );
+                          Navigator.pop(context);
                         } catch (e) {
-                          showTopSnackBar(
+                          showTopSnackBar(  
                             Overlay.of(context),
                             CustomSnackBar.error(
                               message: "Error uploading workshop: $e",
