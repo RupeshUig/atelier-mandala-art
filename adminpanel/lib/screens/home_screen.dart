@@ -1,6 +1,6 @@
 import 'package:adminpanel/components/dashboard_tile.dart';
 import 'package:adminpanel/screens/login_screen.dart';
-import 'package:adminpanel/screens/workshops/upload_workshop.dart';
+import 'package:adminpanel/screens/workshops/manage_workshops.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -113,12 +113,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const UploadNewWorkShop()));
+                        builder: (context) => const ManageWorkshops()));
+              },
+            ),
+            
+            ListTile(
+              leading: Icon(Icons.delivery_dining),
+              title: const Text('Manage Takeways'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.wallet_giftcard),
+              title: const Text('Publish Giftcards'),
+              subtitle: const Text("Coming Soon..."),
+              onTap: () {
+                // Update the state of the app.
+                // ...
               },
             ),
             ListTile(
               leading: Icon(Icons.shopping_cart),
               title: const Text('Manage Store'),
+              subtitle: const Text("Coming Soon..."),
               onTap: () {
                 // Update the state of the app.
                 // ...
