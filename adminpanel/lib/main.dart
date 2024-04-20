@@ -1,5 +1,5 @@
-
 import 'package:adminpanel/firebase_options.dart';
+import 'package:adminpanel/screens/course.dart';
 import 'package:adminpanel/screens/home_screen.dart';
 import 'package:adminpanel/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,7 +51,8 @@ class AuthenticationWrapper extends StatelessWidget {
         } else {
           if (snapshot.hasData) {
             // User is signed in
-            return HomeScreen();
+            // return HomeScreen();
+            return coursePage();
           } else {
             // User is not signed in
             return SplashScreen();
