@@ -1,4 +1,7 @@
+import 'package:adminpanel/components/custom_latest_purchase_card.dart';
+import 'package:adminpanel/components/custom_new_user.dart';
 import 'package:adminpanel/components/dashboard_tile.dart';
+import 'package:adminpanel/constants/constants.dart';
 import 'package:adminpanel/screens/login_screen.dart';
 import 'package:adminpanel/screens/workshops/manage_workshops.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,69 +32,110 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        // child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: GridView.count(
-                primary: false,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  customDashboardTile(
-                      "457",
-                      "adminpanel/lib/assets/logo/total_user.png",
-                      "Total User",
-                      context),
-                  customDashboardTile(
-                      "457",
-                      "adminpanel/lib/assets/logo/total_user.png",
-                      "Total User",
-                      context),
-                  customDashboardTile(
-                      "457",
-                      "adminpanel/lib/assets/logo/total_user.png",
-                      "Total User",
-                      context),
-                  customDashboardTile(
-                      "457",
-                      "adminpanel/lib/assets/logo/total_user.png",
-                      "Total User",
-                      context)
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: screenHeight * 0.45,
+                child: Expanded(
+                  child: GridView.count(
+                    primary: false,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    children: <Widget>[
+                      customDashboardTile(
+                          "457",
+                          "adminpanel/lib/assets/logo/total_user.png",
+                          "Total User",
+                          context),
+                      customDashboardTile(
+                          "457",
+                          "adminpanel/lib/assets/logo/total_user.png",
+                          "Total User",
+                          context),
+                      customDashboardTile(
+                          "457",
+                          "adminpanel/lib/assets/logo/total_user.png",
+                          "Total User",
+                          context),
+                      customDashboardTile(
+                          "457",
+                          "adminpanel/lib/assets/logo/total_user.png",
+                          "Total User",
+                          context),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "New User",
+                    style: GoogleFonts.dmSans(
+                      color: Colors.black,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    "View All",
+                    style: GoogleFonts.dmSans(
+                      color: primaryColor,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.03,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "New User",
-                  style: GoogleFonts.dmSans(
-                    color: Colors.black,
-                    fontSize: 28,
+              SizedBox(
+                height: screenHeight * 0.02,
+              ),
+              //............add New user card or call list ..................//
+              customNewUserCard("Courtney Henry", "1",
+                  "lib/assets/logo/new_user.png", context),
+              customNewUserCard("Courtney Henry", "1",
+                  "lib/assets/logo/new_user.png", context),
+              customNewUserCard("Courtney Henry", "1",
+                  "lib/assets/logo/new_user.png", context),
+              customNewUserCard("Courtney Henry", "1",
+                  "lib/assets/logo/new_user.png", context),
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest Purchases",
+                    style: GoogleFonts.dmSans(
+                      color: Colors.black,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                Text(
-                  "View All",
-                  style: GoogleFonts.dmSans(
-                    color: const Color.fromARGB(52, 0, 0, 0),
-                    fontSize: 16,
+                  Text(
+                    "View All",
+                    style: GoogleFonts.dmSans(
+                      color: primaryColor,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.02,
+              ),
+              //..................add latest purchase or call list of coustomPurchaseCard.............//
+              customPurchaseCard('Event Name', "Wade Warren", '299', context),
+              customPurchaseCard('Event Name', "Wade Warren", '299', context),
+            ],
+          ),
         ),
       ),
       drawer: Drawer(
@@ -116,7 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context) => const ManageWorkshops()));
               },
             ),
-            
             ListTile(
               leading: Icon(Icons.delivery_dining),
               title: const Text('Manage Takeways'),
