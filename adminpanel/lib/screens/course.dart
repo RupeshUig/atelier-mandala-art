@@ -62,10 +62,10 @@ class _coursePageState extends State<coursePage> {
                               const EdgeInsets.symmetric(horizontal: 20),
                           labelText: "Search",
                           border: OutlineInputBorder(
-                              // borderSide: BorderSide(
-                              //   // color: dividerColor,
-                              //   width: 0,
-                              // ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 0,
+                              ),
                               borderRadius: BorderRadius.circular(50)),
                         ),
                       ),
