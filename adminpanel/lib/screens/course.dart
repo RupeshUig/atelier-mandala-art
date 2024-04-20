@@ -1,110 +1,142 @@
-import 'package:adminpanel/components/custom_course_card.dart';
-import 'package:adminpanel/components/custom_latest_purchase_card.dart';
-import 'package:adminpanel/components/custom_new_user.dart';
-import 'package:adminpanel/components/dashboard_tile.dart';
-import 'package:adminpanel/constants/constants.dart';
-import 'package:adminpanel/screens/login_screen.dart';
-import 'package:adminpanel/screens/workshops/manage_workshops.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:adminpanel/providers/workshop_provider.dart';
+import 'package:adminpanel/screens/workshops/upload_workshop.dart';
+import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class coursePage extends StatefulWidget {
-  const coursePage({super.key});
+class Course extends StatefulWidget {
+  const Course({super.key});
 
   @override
-  State<coursePage> createState() => _coursePageState();
+  State<Course> createState() => _CourseState();
 }
 
-class _coursePageState extends State<coursePage> {
+class _CourseState extends State<Course> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-    User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
-        // centerTitle: true,
-        title: Text(
-          "Course",
-          // textAlign: TextAlign.left,
-          style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
+        centerTitle: true,
+        title: const Text("Course"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: screenWidth,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: screenWidth * 0.7,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          // prefixIcon: const Icon(Icons.search_rounded),
-                          suffixIcon: const Icon(
-                            Icons.search_rounded,
-                            color: Colors.orange,
-                            size: 29,
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 20),
-                          labelText: "Search",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 0,
-                              ),
-                              borderRadius: BorderRadius.circular(50)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      // decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     border: Border.all(
-                      //       // color: Colors.grey.shade600,
-                      //     ))
-                      // ,
-                      child: Icon(
-                        Icons.filter_alt_outlined,
-                        // color: Colors.grey.shade600,
-                        color: primaryColor,
-                        size: 32,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
-              customCoursesCard('324', "lib/assets/logo/course_img.png", "Free",
-                  "Data and Data scien", context),
-              customCoursesCard('324', "lib/assets/logo/course_img.png", "Free",
-                  "Data and Data scien", context),
-              customCoursesCard('324', "lib/assets/logo/course_img.png", "Free",
-                  "Data and Data scien", context)
-            ],
-          ),
-        ),
-      ),
+      body: WorkshopList(),
     );
   }
+}
+
+class WorkshopList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('workshops').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final workshops = snapshot.data!.docs;
+
+        return ListView.builder(
+          itemCount: workshops.length,
+          itemBuilder: (context, index) {
+            final workshop = workshops[index];
+            Map<String, dynamic> data = workshop.data() as Map<String, dynamic>;
+            return workshopTiles(workshop: data);
+          },
+        );
+      },
+    );
+  }
+}
+
+Widget workshopTiles({required Map<String, dynamic> workshop}) {
+  String formatDate(DateTime date) {
+    String dayOfWeek = DateFormat.E().format(date); // "Sun"
+
+    String dayOfMonth = DateFormat.d().format(date); // "27"
+
+    String month = DateFormat.MMMM().format(date); // "April"
+
+    String formattedDate = '$dayOfWeek - $dayOfMonth $month';
+
+    return formattedDate;
+  }
+
+  String formatTime(DateTime dateTime) {
+    final String formattedTime = DateFormat('h:mm a').format(dateTime);
+    return formattedTime;
+  }
+
+  Timestamp timestamp = workshop['startTime'];
+  DateTime startDateDateTime = timestamp.toDate();
+  Timestamp timestamp1 = workshop['endTime'];
+  DateTime startDateDateTime1 = timestamp.toDate();
+  String startTime = formatTime(startDateDateTime);
+  String endTime = formatTime(startDateDateTime1);
+
+  String startDate = formatDate(startDateDateTime);
+  String endDate = formatDate(startDateDateTime1);
+  if (workshop == null) {
+    // Handle the case when workshop is null, such as showing a placeholder widget
+    return SizedBox();
+  }
+  return Consumer(
+    builder: (context, ref, child) => Container(
+      margin: EdgeInsets.all(8),
+      width: double.infinity,
+      height: 150,
+      child: Card.outlined(
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 10),
+              height: 120,
+              width: 90,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                      image: NetworkImage(workshop['image']),
+                      fit: BoxFit.cover)),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    workshop['title'],
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Text('${workshop['registered']} People Enrolled'),
+                  Text(
+                    '${startDate} to ${endDate}',
+                    style: GoogleFonts.poppins(
+                        color: Colors.blue, fontWeight: FontWeight.w300),
+                  ),
+                  Text(
+                    '${startTime} - ${endTime}',
+                    style: GoogleFonts.poppins(
+                        color: Colors.blue, fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

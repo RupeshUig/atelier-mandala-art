@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:adminpanel/components/custom_button.dart';
-import 'package:adminpanel/constants/constants.dart';
 
 Widget customCoursesCard(
   enrolled,
