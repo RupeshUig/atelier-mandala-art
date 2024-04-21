@@ -34,10 +34,10 @@ Widget customNewUserCard(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(width: screenWidth * 0.06),
+              SizedBox(width: screenWidth * 0.03),
               Container(
-                height: screenHeight * 0.08,
-                width: screenWidth * 0.165,
+                height: screenHeight * 0.068,
+                width: screenWidth * 0.14,
                 decoration: BoxDecoration(
                     boxShadow: [
                       // BoxShadow(color: Colors.grey.shade300, blurRadius: 12)
@@ -65,18 +65,18 @@ Widget customNewUserCard(
                     " ${textUser}",
                     style: GoogleFonts.urbanist(
                       color: Colors.black,
-                      fontSize: 22,
+                      fontSize: 18,
                       // fontWeight: FontWeight.normal,
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight * 0.01,
+                    height: screenHeight * 0.007,
                   ),
                   Text(
                     "Enrolled Course: ${EnrolledCourse}",
                     style: GoogleFonts.urbanist(
                       color: const Color.fromARGB(164, 0, 0, 0),
-                      fontSize: 16,
+                      fontSize: 15,
                     ),
                   ),
                 ],

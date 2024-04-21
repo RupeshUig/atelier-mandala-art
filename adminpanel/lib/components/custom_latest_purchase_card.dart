@@ -16,52 +16,55 @@ Widget customPurchaseCard(
         color: Colors.white,
       ),
       width: screenWidth * 0.9,
-      child: Row(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: screenHeight * 0.015,
-              ),
-              Text(
-                textEvent,
-                style: GoogleFonts.urbanist(
-                  color: Colors.black,
-                  fontSize: 22,
-                  // fontWeight: FontWeight.normal,
-                ),
-              ),
-              Text(
-                textInstructor,
-                style: GoogleFonts.urbanist(
-                  color: const Color.fromARGB(164, 0, 0, 0),
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.018,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 120),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: screenHeight * 0.015,
+                ),
                 Text(
-                  "\$ ${textPrice}",
+                  textEvent,
                   style: GoogleFonts.urbanist(
                     color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    // fontWeight: FontWeight.normal,
                   ),
+                ),
+                Text(
+                  textInstructor,
+                  style: GoogleFonts.urbanist(
+                    color: const Color.fromARGB(164, 0, 0, 0),
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.018,
                 ),
               ],
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 120),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "\$ ${textPrice}",
+                    style: GoogleFonts.urbanist(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ));
 }

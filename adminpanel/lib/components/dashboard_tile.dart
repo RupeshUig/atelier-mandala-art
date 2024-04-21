@@ -13,14 +13,15 @@ Widget customDashboardTile(
   final screenWidth = MediaQuery.of(context).size.width;
   return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          // BoxShadow(color: Colors.grey.shade300, blurRadius: 12)
-        ],
-        borderRadius: BorderRadius.circular(5),
-        border:
-            Border.all(width: 0.0, color: const Color.fromARGB(30, 0, 0, 0)),
-        color: const Color.fromARGB(55, 255, 255, 255),
-      ),
+          boxShadow: [
+            // BoxShadow(color: Colors.grey.shade300, blurRadius: 12)
+          ],
+          borderRadius: BorderRadius.circular(5),
+          border:
+              // Border.all(width: 0.0, color: const Color.fromARGB(30, 0, 0, 0)),
+              Border.all(width: 0.0, color: Colors.transparent),
+          // color: const Color.fromARGB(55, 255, 255, 255),
+          color: Colors.white),
       height: screenHeight * 0.4,
       width: screenWidth * 0.3,
       // onTap: function,
@@ -56,7 +57,7 @@ Widget customDashboardTile(
               textcategory,
               style: GoogleFonts.dmSans(
                 color: Colors.black,
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
             SizedBox(
@@ -66,7 +67,7 @@ Widget customDashboardTile(
               totalCount,
               style: GoogleFonts.dmSans(
                   color: Colors.black,
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
           ],

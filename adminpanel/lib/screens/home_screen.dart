@@ -23,11 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           "Admin Dashboard",
-          style: GoogleFonts.poppins(fontSize: 22),
+          style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
@@ -37,40 +38,40 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: screenHeight * 0.45,
-                child: Expanded(
-                  child: GridView.count(
-                    primary: false,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    children: <Widget>[
-                      customDashboardTile(
-                          "457",
-                          "adminpanel/lib/assets/logo/total_user.png",
-                          "Total User",
-                          context),
-                      customDashboardTile(
-                          "457",
-                          "adminpanel/lib/assets/logo/total_user.png",
-                          "Total User",
-                          context),
-                      customDashboardTile(
-                          "457",
-                          "adminpanel/lib/assets/logo/total_user.png",
-                          "Total User",
-                          context),
-                      customDashboardTile(
-                          "457",
-                          "adminpanel/lib/assets/logo/total_user.png",
-                          "Total User",
-                          context),
-                    ],
-                  ),
+                // child: Expanded(
+                child: GridView.count(
+                  primary: false,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                    customDashboardTile(
+                        "457",
+                        "adminpanel/lib/assets/logo/total_user.png",
+                        "Total User",
+                        context),
+                    customDashboardTile(
+                        "457",
+                        "adminpanel/lib/assets/logo/total_user.png",
+                        "Total User",
+                        context),
+                    customDashboardTile(
+                        "457",
+                        "adminpanel/lib/assets/logo/total_user.png",
+                        "Total User",
+                        context),
+                    customDashboardTile(
+                        "457",
+                        "adminpanel/lib/assets/logo/total_user.png",
+                        "Total User",
+                        context),
+                  ],
                 ),
+                // ),
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -81,15 +82,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     "New User",
                     style: GoogleFonts.dmSans(
-                      color: Colors.black,
-                      fontSize: 24,
-                    ),
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "View All",
                     style: GoogleFonts.dmSans(
                       color: primaryColor,
-                      fontSize: 16,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -115,15 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     "Latest Purchases",
                     style: GoogleFonts.dmSans(
-                      color: Colors.black,
-                      fontSize: 24,
-                    ),
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "View All",
                     style: GoogleFonts.dmSans(
                       color: primaryColor,
-                      fontSize: 16,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -165,10 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
               title: const Text('Course'),
               onTap: () {
                 // Update the state of the app.
-                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Course()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Course()));
               },
             ),
             ListTile(
