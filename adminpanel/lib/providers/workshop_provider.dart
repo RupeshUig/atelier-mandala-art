@@ -5,6 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adminpanel/models/workshop_model.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 final workshopprovider = ChangeNotifierProvider((ref) => Workshop());
 
@@ -13,13 +15,19 @@ class Workshop extends ChangeNotifier {
   final CollectionReference _workshopsCollection =
       FirebaseFirestore.instance.collection('workshops');
 
-  Future<void> deleteWorkshop(String workshopId) async {
+  Future<void> deleteWorkshop(String workshopId, BuildContext context) async {
     try {
       await FirebaseFirestore.instance
           .collection('workshops')
           .doc(workshopId)
           .delete();
       print('Workshop deleted successfully.');
+      showTopSnackBar(
+        Overlay.of(context),
+        CustomSnackBar.info(
+          message: "Workshop deleted",
+        ),
+      );
     } catch (e) {
       print('Error deleting workshop: $e');
     }

@@ -1,3 +1,4 @@
+import 'package:adminpanel/constants/constants.dart';
 import 'package:adminpanel/providers/workshop_provider.dart';
 import 'package:adminpanel/screens/workshops/upload_workshop.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
@@ -21,7 +22,7 @@ class _CourseState extends State<Course> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Course"),
+        title: const Text("Published Courses"),
       ),
       body: WorkshopList(),
     );
@@ -118,18 +119,18 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
                     workshop['title'],
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  Text('${workshop['registered']} People Enrolled'),
+                  Text('${workshop['registered']} Enrollments'),
                   Text(
                     '${startDate} to ${endDate}',
                     style: GoogleFonts.poppins(
-                        color: Colors.blue, fontWeight: FontWeight.w300),
+                        color: primaryColor, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${startTime} - ${endTime}',
                     style: GoogleFonts.poppins(
-                        color: Colors.blue, fontWeight: FontWeight.w300),
+                        color: Colors.grey, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

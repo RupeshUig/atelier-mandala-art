@@ -28,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text(
           "Admin Dashboard",
-          style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            fontSize: 22,
+          ),
         ),
       ),
       body: Padding(
@@ -50,24 +52,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2,
                   children: <Widget>[
                     customDashboardTile(
+                        Icon(
+                          Icons.verified_user_outlined,
+                          color: Colors.orange,
+                        ),
                         "457",
                         "adminpanel/lib/assets/logo/total_user.png",
                         "Total User",
                         context),
                     customDashboardTile(
+                        Icon(
+                          Icons.download_outlined,
+                          color: Colors.orange,
+                        ),
                         "457",
                         "adminpanel/lib/assets/logo/total_user.png",
-                        "Total User",
+                        "Total Enrolled",
                         context),
                     customDashboardTile(
+                        Icon(
+                          Icons.person_add_alt_outlined,
+                          color: Colors.orange,
+                        ),
                         "457",
                         "adminpanel/lib/assets/logo/total_user.png",
-                        "Total User",
+                        "Total Users",
                         context),
                     customDashboardTile(
+                        Icon(
+                          Icons.event_available_outlined,
+                          color: Colors.orange,
+                        ),
                         "457",
                         "adminpanel/lib/assets/logo/total_user.png",
-                        "Total User",
+                        "Total Events",
                         context),
                   ],
                 ),
@@ -140,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 247, 230, 209),
+        backgroundColor: Color.fromARGB(255, 241, 239, 237),
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,

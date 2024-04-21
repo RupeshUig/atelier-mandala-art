@@ -1,7 +1,9 @@
 import 'dart:io';
-
+import 'package:adminpanel/constants/constants.dart';
 import 'package:adminpanel/providers/workshop_provider.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
+import 'package:adminpanel/components/custom_button.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,13 +36,10 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
   String formatDate(DateTime date) {
     // Format the day of the week
     String dayOfWeek = DateFormat.E().format(date); // "Sun"
-
     // Format the day of the month
     String dayOfMonth = DateFormat.d().format(date); // "27"
-
     // Format the month name
     String month = DateFormat.MMMM().format(date); // "April"
-
     // Combine the formatted parts into the desired format
     String formattedDate = '$dayOfWeek - $dayOfMonth $month';
 
@@ -161,57 +160,99 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                 ),
               ),
               const SizedBox(
-                height: 15,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const SizedBox(
                 height: 50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                      onPressed: () async {
-                        final DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            firstDate: DateTime(2023),
-                            lastDate: DateTime(2050));
-                        if (pickedDate != null && pickedDate != startDate) {
-                          setState(() {
-                            startDate = pickedDate;
-                            startDateFormatted = formatDate(startDate);
-                          });
-                        }
-                        print(endDateFormatted);
-                        print(startDate);
-                      },
-                      child: Text(startDateFormatted)),
-                  ElevatedButton(
-                      onPressed: () async {
-                        final DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            firstDate: DateTime(2023),
-                            lastDate: DateTime(2050));
-                        if (pickedDate != null && pickedDate != endDate) {
-                          setState(() {
-                            endDate = pickedDate;
-                            endDateFormatted = formatDate(endDate);
-                          });
-                        }
-                      },
-                      child: Text(endDateFormatted))
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text(formatTime(startDate)),
-                    subtitle: Text("Start Time"),
-                    trailing: IconButton(
-                        onPressed: () async {
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Start Date",
+                        style: GoogleFonts.poppins(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              firstDate: DateTime(2023),
+                              lastDate: DateTime(2050));
+                          if (pickedDate != null && pickedDate != startDate) {
+                            setState(() {
+                              startDate = pickedDate;
+                              startDateFormatted = formatDate(startDate);
+                            });
+                          }
+                          print(endDateFormatted);
+                          print(startDate);
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: Center(
+                              child: Text(
+                            formatDate(startDate),
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        "End Date",
+                        style: GoogleFonts.poppins(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          final DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              firstDate: DateTime(2023),
+                              lastDate: DateTime(2050));
+                          if (pickedDate != null && pickedDate != endDate) {
+                            setState(() {
+                              endDate = pickedDate;
+                              endDateFormatted = formatDate(endDate);
+                            });
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: Center(
+                              child: Text(
+                            formatDate(endDate),
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          )),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Start Time",
+                        style: GoogleFonts.poppins(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      InkWell(
+                        onTap: () async {
                           final TimeOfDay? pickedTime = await showTimePicker(
                               context: context, initialTime: TimeOfDay.now());
                           if (pickedTime != null) {
@@ -227,13 +268,31 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           }
                           print(startDate);
                         },
-                        icon: Icon(Icons.lock_clock)),
-                  ),
-                  ListTile(
-                    title: Text(formatTime(endDate)),
-                    subtitle: Text("End Time"),
-                    trailing: IconButton(
-                        onPressed: () async {
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: Center(
+                              child: Text(
+                            formatTime(startDate),
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        "End Time",
+                        style: GoogleFonts.poppins(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      InkWell(
+                        onTap: () async {
                           final TimeOfDay? pickedTime = await showTimePicker(
                               context: context, initialTime: TimeOfDay.now());
                           if (pickedTime != null) {
@@ -249,7 +308,20 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           }
                           print(endDate);
                         },
-                        icon: Icon(Icons.lock_clock)),
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: Center(
+                              child: Text(
+                            formatTime(endDate),
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500),
+                          )),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -329,75 +401,69 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
               ),
               Consumer(
                 builder: (context, ref, child) => Center(
-                  child: ElevatedButton.icon(
-                      style: ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                              ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                          backgroundColor: MaterialStatePropertyAll<Color>(
-                              Colors.orange.shade300)),
-                      onPressed: () async {
+                  child: CustomButton(
+                    text: "Publish",
+                    color: primaryColor,
+                    textColor: Colors.white,
+                    function: () async {
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.info(
+                          message: "Uploading Image",
+                        ),
+                      );
+                      final workShopProviderInstance =
+                          ref.watch(workshopprovider);
+                      String downloadUrl = await workShopProviderInstance
+                          .uploadImage(_image!, titleController.text.trim());
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.info(
+                          message: "Image Uploaded",
+                        ),
+                      );
+                      Map<String, dynamic> workshopData = {
+                        'image': downloadUrl,
+                        'title': titleController.text.trim() ?? "Not Available",
+                        'description': descriptionController.text.trim() ??
+                            "Not Available",
+                        'startTime':
+                            startDate, // Assuming startTime is a DateTime
+                        'endTime': endDate, // Assuming endTime is a DateTime
+                        'ticketPrice': ticketController.text
+                            .trim(), // Assuming ticketPrice is an int
+                        'eventLocation': eventLocationController.text.trim() ??
+                            "Not Available",
+                        'slots': slotController.text.trim() ??
+                            "Not Available", // Assuming slots is an int
+                        'registered': 0, // Assuming registered is an int
+                        'enrollments':
+                            [], // Assuming enrollments is an array of strings
+                      };
+                      try {
+                        await FirebaseFirestore.instance
+                            .collection('workshops')
+                            .doc(titleController.text.trim())
+                            .set(workshopData);
                         showTopSnackBar(
                           Overlay.of(context),
                           CustomSnackBar.info(
-                            message: "Uploading Image",
+                            message: "Workshop uploaded successfully.",
                           ),
                         );
-                        final workShopProviderInstance =
-                            ref.watch(workshopprovider);
-                        String downloadUrl = await workShopProviderInstance
-                            .uploadImage(_image!, titleController.text.trim());
+                        Navigator.pop(context);
+                      } catch (e) {
                         showTopSnackBar(
                           Overlay.of(context),
-                          CustomSnackBar.info(
-                            message: "Image Uploaded",
+                          CustomSnackBar.error(
+                            message: "Error uploading workshop: $e",
                           ),
                         );
-                        Map<String, dynamic> workshopData = {
-                          'image': downloadUrl,
-                          'title':
-                              titleController.text.trim() ?? "Not Available",
-                          'description': descriptionController.text.trim() ??
-                              "Not Available",
-                          'startTime':
-                              startDate, // Assuming startTime is a DateTime
-                          'endTime': endDate, // Assuming endTime is a DateTime
-                          'ticketPrice': ticketController.text
-                              .trim(), // Assuming ticketPrice is an int
-                          'eventLocation':
-                              eventLocationController.text.trim() ??
-                                  "Not Available",
-                          'slots': slotController.text.trim() ??
-                              "Not Available", // Assuming slots is an int
-                          'registered': 0, // Assuming registered is an int
-                          'enrollments':
-                              [], // Assuming enrollments is an array of strings
-                        };
-                        try {
-                          await FirebaseFirestore.instance
-                              .collection('workshops')
-                              .doc(titleController.text.trim())
-                              .set(workshopData);
-                          showTopSnackBar(
-                            Overlay.of(context),
-                            CustomSnackBar.info(
-                              message: "Workshop uploaded successfully.",
-                            ),
-                          );
-                          Navigator.pop(context);
-                        } catch (e) {
-                          showTopSnackBar(  
-                            Overlay.of(context),
-                            CustomSnackBar.error(
-                              message: "Error uploading workshop: $e",
-                            ),
-                          );
-                        }
-                        print(workshopData);
-                        print(downloadUrl);
-                      },
-                      icon: Icon(Icons.save),
-                      label: Text("Save Workshop")),
+                      }
+                      print(workshopData);
+                      print(downloadUrl);
+                    },
+                  ),
                 ),
               ),
               const SizedBox(

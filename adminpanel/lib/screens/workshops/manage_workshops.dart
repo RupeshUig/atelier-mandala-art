@@ -1,3 +1,4 @@
+import 'package:adminpanel/constants/constants.dart';
 import 'package:adminpanel/providers/workshop_provider.dart';
 import 'package:adminpanel/screens/workshops/upload_workshop.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
@@ -129,37 +130,39 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
                     style: GoogleFonts.poppins(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  Text('${workshop['registered']} People Enrolled'),
+                  Text('${workshop['registered']} Enrollments'),
                   Text(
                     '${startDate} to ${endDate}',
                     style: GoogleFonts.poppins(
-                        color: Colors.blue, fontWeight: FontWeight.w300),
+                        color: primaryColor, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${startTime} - ${endTime}',
                     style: GoogleFonts.poppins(
-                        color: Colors.blue, fontWeight: FontWeight.w300),
+                        color: Colors.grey, fontWeight: FontWeight.w500),
                   ),
                   Row(
                     children: [
+                      const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 18,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
                       IconButton(
                           onPressed: () async {
                             final manageWorkShopProvider =
                                 ref.read(workshopprovider);
                             await manageWorkShopProvider
-                                .deleteWorkshop(workshop['title'])
-                                .then((value) {
-                              showTopSnackBar(
-                                Overlay.of(context),
-                                CustomSnackBar.info(
-                                  message: "Workshop deleted",
-                                ),
-                              );
-                            });
+                                .deleteWorkshop(workshop['title'], context)
+                                .then((value) {});
                           },
                           icon: Text(
                             'Delete Workshop',
-                            style: GoogleFonts.poppins(color: Colors.red),
+                            style: GoogleFonts.poppins(
+                                color: Colors.red, fontWeight: FontWeight.w500),
                           )),
                     ],
                   ),
