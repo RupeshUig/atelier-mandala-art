@@ -68,7 +68,7 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -84,8 +84,11 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Add a Title",
+                " Add a Title",
                 style: GoogleFonts.poppins(fontSize: 18),
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextField(
                 controller: titleController,
@@ -102,18 +105,21 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Text(
                 "Add a Description",
                 style: GoogleFonts.poppins(fontSize: 18),
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextField(
                 controller: descriptionController,
                 maxLength: 100,
                 autocorrect: true,
                 decoration: InputDecoration(
-                  hintText: "Enter Workshop Title",
+                  hintText: "Enter Workshop Description",
                   hintStyle: GoogleFonts.poppins(fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -160,7 +166,7 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -195,12 +201,19 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           width: 150,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)),
-                          child: Center(
-                              child: Text(
-                            formatDate(startDate),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500),
-                          )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Center(
+                                  child: Text(
+                                formatDate(startDate),
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500),
+                              )),
+                              Image.asset("lib/assets/logo/downarrow.png",
+                                  scale: 4.5)
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -231,12 +244,19 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           width: 150,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)),
-                          child: Center(
-                              child: Text(
-                            formatDate(endDate),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500),
-                          )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Center(
+                                  child: Text(
+                                formatDate(endDate),
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500),
+                              )),
+                              Image.asset("lib/assets/logo/downarrow.png",
+                                  scale: 4.5)
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -273,12 +293,19 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           width: 150,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)),
-                          child: Center(
-                              child: Text(
-                            formatTime(startDate),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500),
-                          )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Center(
+                                  child: Text(
+                                formatTime(startDate),
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500),
+                              )),
+                              Image.asset("lib/assets/logo/downarrow.png",
+                                  scale: 4.5)
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -313,12 +340,19 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                           width: 150,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)),
-                          child: Center(
-                              child: Text(
-                            formatTime(endDate),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500),
-                          )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Center(
+                                  child: Text(
+                                formatTime(endDate),
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500),
+                              )),
+                              Image.asset("lib/assets/logo/downarrow.png",
+                                  scale: 4.5)
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -326,56 +360,46 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: ticketController,
-                      keyboardType: TextInputType.number,
-                      autocorrect: true,
-                      decoration: InputDecoration(
-                        prefix: Icon(
-                          Icons.attach_money,
-                          size: 16,
-                        ),
-                        hintText: "Enter Ticket Price",
-                        hintStyle: GoogleFonts.poppins(fontSize: 15),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: Colors.orange,
-                          ),
-                        ),
-                      ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              Text(
+                " Ticket Name",
+                style: GoogleFonts.poppins(fontSize: 18),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              TextField(
+                controller: eventLocationController,
+                keyboardType: TextInputType.text,
+                autocorrect: true,
+                decoration: InputDecoration(
+                  prefix: Icon(
+                    Icons.location_on,
+                    size: 15,
+                  ),
+                  hintText: "Ticket Name",
+                  hintStyle: GoogleFonts.poppins(fontSize: 15),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                      color: Colors.orange,
                     ),
                   ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      controller: slotController,
-                      keyboardType: TextInputType.number,
-                      autocorrect: true,
-                      decoration: InputDecoration(
-                        prefix: Text(""),
-                        hintText: "Enter Slots",
-                        hintStyle: GoogleFonts.poppins(fontSize: 15),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: Colors.orange,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
+              ),
+              Text(
+                " Workshop Location",
+                style: GoogleFonts.poppins(fontSize: 18),
+              ),
+              SizedBox(
+                height: 8,
               ),
               TextField(
                 controller: eventLocationController,
@@ -396,6 +420,80 @@ class _UploadNewWorkShopState extends State<UploadNewWorkShop> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          " Ticket Price",
+                          style: GoogleFonts.poppins(fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        TextField(
+                          controller: ticketController,
+                          keyboardType: TextInputType.number,
+                          autocorrect: true,
+                          decoration: InputDecoration(
+                            prefix: Icon(
+                              Icons.attach_money,
+                              size: 16,
+                            ),
+                            hintText: "Enter Ticket Price",
+                            hintStyle: GoogleFonts.poppins(fontSize: 15),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Category",
+                          style: GoogleFonts.poppins(fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        TextField(
+                          controller: slotController,
+                          keyboardType: TextInputType.number,
+                          autocorrect: true,
+                          decoration: InputDecoration(
+                            prefix: Text(""),
+                            hintText: "Art",
+                            hintStyle: GoogleFonts.poppins(fontSize: 15),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
               const SizedBox(
                 height: 50,
               ),

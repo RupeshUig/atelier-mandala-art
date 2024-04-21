@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: screenHeight * 0.45,
+                height: screenHeight * 0.64,
                 // child: Expanded(
                 child: GridView.count(
                   primary: false,
@@ -52,40 +52,58 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2,
                   children: <Widget>[
                     customDashboardTile(
-                        Icon(
-                          Icons.verified_user_outlined,
-                          color: Colors.orange,
-                        ),
+                        // Icon(
+                        //   Icons.verified_user_outlined,
+                        //   color: Colors.orange,
+                        // ),
                         "457",
-                        "adminpanel/lib/assets/logo/total_user.png",
+                        "lib/assets/logo/total_user.png",
                         "Total User",
                         context),
                     customDashboardTile(
-                        Icon(
-                          Icons.download_outlined,
-                          color: Colors.orange,
-                        ),
+                        // Icon(
+                        //   Icons.download_outlined,
+                        //   color: Colors.orange,
+                        // ),
                         "457",
-                        "adminpanel/lib/assets/logo/total_user.png",
+                        "lib/assets/logo/enrolled.png",
                         "Total Enrolled",
                         context),
                     customDashboardTile(
-                        Icon(
-                          Icons.person_add_alt_outlined,
-                          color: Colors.orange,
-                        ),
+                        // Icon(
+                        //   Icons.person_add_alt_outlined,
+                        //   color: Colors.orange,
+                        // ),
                         "457",
-                        "adminpanel/lib/assets/logo/total_user.png",
-                        "Total Users",
+                        "lib/assets/logo/subscriber.png",
+                        "Total Subscriber",
                         context),
                     customDashboardTile(
-                        Icon(
-                          Icons.event_available_outlined,
-                          color: Colors.orange,
-                        ),
+                        // Icon(
+                        //   Icons.event_available_outlined,
+                        //   color: Colors.orange,
+                        // ),
                         "457",
-                        "adminpanel/lib/assets/logo/total_user.png",
+                        "lib/assets/logo/purchase.png",
+                        "Total Purchase",
+                        context),
+                    customDashboardTile(
+                        // Icon(
+                        //   Icons.event_available_outlined,
+                        //   color: Colors.orange,
+                        // ),
+                        "457",
+                        "lib/assets/logo/events.png",
                         "Total Events",
+                        context),
+                    customDashboardTile(
+                        // Icon(
+                        //   Icons.event_available_outlined,
+                        //   color: Colors.orange,
+                        // ),
+                        "457",
+                        "lib/assets/logo/notification.png",
+                        "Total Notification",
                         context),
                   ],
                 ),
@@ -158,29 +176,55 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 241, 239, 237),
+        backgroundColor: Colors.white,
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             const SizedBox(
-              height: 30,
+              height: 60,
             ),
-            Image.asset(
-              "lib/assets/logo/splash_logo.png",
-              height: 100,
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Row(
+                children: [
+                  Image.asset(
+                    "lib/assets/logo/splash_logo.png",
+                    height: screenHeight * 0.06,
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.03,
+                  ),
+                  Text(
+                    "Atelier Mandala.",
+                    style: headingH3,
+                  )
+                ],
+              ),
             ),
-            Divider(),
+            const SizedBox(
+              height: 10,
+            ),
+            // Divider(),
             ListTile(
-              leading: Icon(Icons.dashboard),
-              title: const Text('Dashboard'),
+              leading: Image.asset(
+                "lib/assets/logo/mage_dashboard.png",
+                scale: 4.5,
+              ),
+              title: const Text(
+                'Dashboard',
+              ),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              leading: Icon(Icons.book),
+              // contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+              leading: Image.asset(
+                "lib/assets/logo/course.png",
+                scale: 4.5,
+              ),
               title: const Text('Course'),
               onTap: () {
                 // Update the state of the app.
@@ -189,7 +233,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
+              leading: Image.asset(
+                "lib/assets/logo/user.png",
+                scale: 4.5,
+              ),
               title: const Text('User'),
               onTap: () {
                 // Update the state of the app.
@@ -198,7 +245,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.payment),
+              leading: Image.asset(
+                "lib/assets/logo/payment.png",
+                scale: 4.5,
+              ),
               title: const Text('Payments'),
               onTap: () {
                 // Update the state of the app.
@@ -206,7 +256,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.book),
+              leading: Image.asset(
+                "lib/assets/logo/manage_workshop.png",
+                scale: 4.5,
+              ),
               title: const Text('Manage Workshops'),
               onTap: () {
                 // Update the state of the app.
@@ -218,7 +271,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.delivery_dining),
+              leading: Image.asset(
+                "lib/assets/logo/take-away.png",
+                scale: 4.5,
+              ),
               title: const Text('Manage Takeways'),
               onTap: () {
                 // Update the state of the app.
@@ -226,18 +282,41 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.wallet_giftcard),
-              title: const Text('Publish Giftcards'),
-              subtitle: const Text("Coming Soon..."),
+              contentPadding: EdgeInsets.only(left: 11),
+              leading: Image.asset(
+                "lib/assets/logo/publish_gift_card.png",
+                scale: 4.5,
+              ),
+              title: Row(
+                children: [
+                  const Text('Publish Giftcards'),
+                  const Text(
+                    " (Coming Soon)",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )
+                ],
+              ),
+              // subtitle: const Text("Coming Soon..."),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart),
-              title: const Text('Manage Store'),
-              subtitle: const Text("Coming Soon..."),
+              leading: Image.asset(
+                "lib/assets/logo/manage_store.png",
+                scale: 4.5,
+              ),
+              title: Row(
+                children: [
+                  const Text('Manage Store'),
+                  const Text(
+                    " (Coming Soon)",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )
+                ],
+              ),
+              // subtitle: const Text("Coming Soon..."),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -245,7 +324,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.payment),
+              leading: Image.asset(
+                "lib/assets/logo/edit.png",
+                scale: 4.5,
+              ),
               title: const Text('Edit Profile'),
               onTap: () {
                 // Update the state of the app.
@@ -253,7 +335,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.payment),
+              leading: Image.asset(
+                "lib/assets/logo/chage_password.png",
+                scale: 4.5,
+              ),
               title: const Text('Change Password'),
               onTap: () {
                 // Update the state of the app.
@@ -261,7 +346,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Image.asset(
+                "lib/assets/logo/logout.png",
+                scale: 4.5,
+              ),
               title: const Text('Logout'),
               onTap: () async {
                 FirebaseAuth.instance.signOut();
@@ -274,11 +362,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ...
               },
             ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Text("Signed In as \n ${user!.email}"),
-            )
+
+            // ........ to see the login email id ..................
+            // const SizedBox(height: 5),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 25),
+            //   child: Text("Signed In as \n ${user!.email}"),
+            // )
           ],
         ),
       ),

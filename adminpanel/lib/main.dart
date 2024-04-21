@@ -52,7 +52,7 @@ class AuthenticationWrapper extends StatelessWidget {
           if (snapshot.hasData) {
             // User is signed in
             // return HomeScreen();
-            return HomeScreen();
+            return SplashScreen();
           } else {
             // User is not signed in
             return SplashScreen();

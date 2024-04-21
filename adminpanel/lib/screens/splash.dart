@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:adminpanel/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key})
@@ -24,8 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: <Color>[
-                Color(0xfff39060),
-                Color.fromARGB(255, 147, 107, 255),
+                Color.fromARGB(255, 255,222, 213),
+                Color(0xC5CAF5),
               ],
               tileMode: TileMode.mirror,
             ),

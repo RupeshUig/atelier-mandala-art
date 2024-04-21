@@ -20,9 +20,10 @@ class _CourseState extends State<Course> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Published Courses"),
+        title: const Text("Courses"),
       ),
       body: WorkshopList(),
     );
@@ -96,7 +97,13 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
       margin: EdgeInsets.all(8),
       width: double.infinity,
       height: 150,
-      child: Card.outlined(
+      // child: Card.outlined(
+      child: Container(
+        decoration: BoxDecoration(
+            // boxShadow: [],
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 0.0, color: Colors.transparent),
+            color: Colors.white),
         child: Row(
           children: [
             Container(
@@ -119,7 +126,7 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
                     workshop['title'],
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text('${workshop['registered']} Enrollments'),
                   Text(
@@ -130,7 +137,32 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
                   Text(
                     '${startTime} - ${endTime}',
                     style: GoogleFonts.poppins(
-                        color: Colors.grey, fontWeight: FontWeight.bold),
+                        color: Colors.grey, fontWeight: FontWeight.w500),
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 18,
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      IconButton(
+                          onPressed: () async {
+                            final manageWorkShopProvider =
+                                ref.read(workshopprovider);
+                            await manageWorkShopProvider
+                                .deleteWorkshop(workshop['title'], context)
+                                .then((value) {});
+                          },
+                          icon: Text(
+                            'Delete Workshop',
+                            style: GoogleFonts.poppins(
+                                color: Colors.red, fontWeight: FontWeight.w500),
+                          )),
+                    ],
                   ),
                 ],
               ),

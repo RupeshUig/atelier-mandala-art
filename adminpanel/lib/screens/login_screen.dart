@@ -104,8 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Adresse e-mail",
                 style: GoogleFonts.dmSans(
                     color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal),
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextField(
                 controller: emailController,
@@ -127,8 +130,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Mot de passe",
                 style: GoogleFonts.dmSans(
                     color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal),
+              ),
+              SizedBox(
+                height: 5,
               ),
               TextField(
                 controller: passwordController,

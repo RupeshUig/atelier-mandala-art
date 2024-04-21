@@ -20,17 +20,22 @@ Color dividerColor = HexColor("#F1F3F6");
 Color additionalDarkBlueLight = HexColor("#0A58CA");
 Color primaryText = HexColor("#292930");
 Color backgroundColor = HexColor("#F7F8FD");
-
+Color grid1 = HexColor("#FFDED5");
+Color grid2 = HexColor("#C5CAF5");
 TextStyle headingH1 = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold);
 TextStyle headingH2 = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 24, fontWeight: FontWeight.normal);
+    TextStyle headingBoldH2 = GoogleFonts.dmSans(
+    color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold);
 TextStyle headingH3 = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold);
 TextStyle headingH4 = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold);
 TextStyle bodyBig = GoogleFonts.dmSans(
     color: Colors.black, fontSize: 18, fontWeight: FontWeight.normal);
+    TextStyle discription = GoogleFonts.poppins(
+    color: Colors.black, fontSize: 14, fontWeight: FontWeight.normal);
 
 
 // Platform  Firebase App Id

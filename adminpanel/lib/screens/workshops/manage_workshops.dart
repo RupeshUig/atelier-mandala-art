@@ -20,8 +20,9 @@ class _ManageWorkshopsState extends State<ManageWorkshops> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Colors.orange,
+          backgroundColor: primaryColor,
           label: const Icon(Icons.add),
           onPressed: () {
             Navigator.push(
@@ -105,7 +106,14 @@ Widget workshopTiles({required Map<String, dynamic> workshop}) {
       margin: EdgeInsets.all(8),
       width: double.infinity,
       height: 150,
-      child: Card.outlined(
+      // child: Card.outlined(
+      child: Container(
+        decoration: BoxDecoration(
+            // boxShadow: [],
+            borderRadius: BorderRadius.circular(10),
+            border:
+                Border.all(width: 0.0, color: Colors.transparent),
+            color: Colors.white),
         child: Row(
           children: [
             Container(
